@@ -27,6 +27,6 @@ public class MD5Util {
 	}
 	
 	public static void main(String[] args){
-		System.out.println(MD5Util.md5Encode("40d58599-5081-42b1-8873-7b0153f015e5"));
+		System.out.println(MD5Util.md5Encode("123456"));
 	}
 }
