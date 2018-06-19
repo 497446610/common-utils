@@ -210,6 +210,43 @@ public class HttpClientUtil {
 		}
 		return result;
 	}
+	
+	
+	public static String doGet(String url,  String charset) throws Exception {
+		if (StringUtils.isEmpty(url)) {
+			throw new Exception("URL参数不能为空！");
+		}
+
+		CloseableHttpClient httpClient = null;
+		HttpGet httpGet = null;
+		String result = null;
+		try {
+			httpClient = httpClientBuilder.build();
+			httpGet = new HttpGet(url);
+			HttpResponse response = httpClient.execute(httpGet);
+			if (response != null) {
+				StatusLine statusLine = response.getStatusLine();
+				if (statusLine.getStatusCode() != 200) {
+					throw new Exception("接口调用失败，错误代码：" + statusLine.getStatusCode());
+				}
+
+				HttpEntity resEntity = response.getEntity();
+				if (resEntity != null) {
+					result = EntityUtils.toString(resEntity, charset);
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex);
+			throw new Exception(ex.getMessage());
+		} finally {
+			try {
+				httpClient.close();
+			} catch (IOException e) {
+				log.error(e);
+			}
+		}
+		return result;
+	}
 
 	private static Header[] getHeader(Map<String, String> headerMap) {
 		if (headerMap == null || headerMap.keySet().size() == 0) {
