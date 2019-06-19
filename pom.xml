@@ -53,6 +53,14 @@
 			<version>2.6</version>
 		</dependency>
 
+
+		<!--引入百度sdk-->
+		<dependency>
+			<groupId>com.baidu.aip</groupId>
+			<artifactId>java-sdk</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+
 		<!-- 条形码、二维码生成 -->
 
 		<dependency>
